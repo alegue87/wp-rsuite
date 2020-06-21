@@ -24,33 +24,46 @@ export class Navigation extends React.Component {
   render() {
 
     if (this.state.parentWidth < window.viewPorts.sm) {
-      return <div>Small Menu</div>
+      return (
+        <Navbar {...this.props}>
+          <Navbar.Header>
+            <a href="/" className="navbar-brand logo">
+              RSUITE
+            </a>
+          </Navbar.Header>
+          <Navbar.Body>
+            <Nav onSelect={this.props.onSelect} activeKey={this.props.activeKey}>
+              <Nav.Item eventKey="1" icon={<Icon icon="bars" />}></Nav.Item>
+            </Nav>
+          </Navbar.Body>
+        </Navbar>
+      )
     }
     else
       return (
         <Navbar {...this.props}>
           <Navbar.Header>
-            <a href="#" className="navbar-brand logo">
+            <a href="/" className="navbar-brand logo">
               RSUITE
-          </a>
+            </a>
           </Navbar.Header>
           <Navbar.Body>
             <Nav onSelect={this.props.onSelect} activeKey={this.props.activeKey}>
               <Nav.Item eventKey="1" icon={<Icon icon="home" />}>
                 Home
-          </Nav.Item>
-              <Nav.Item eventKey="2">News</Nav.Item>
-              <Nav.Item eventKey="3">Products</Nav.Item>
-              <Dropdown title="About">
-                <Dropdown.Item eventKey="4">Company</Dropdown.Item>
-                <Dropdown.Item eventKey="5">Team</Dropdown.Item>
-                <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
-              </Dropdown>
-            </Nav>
-            <Nav pullRight>
-              <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
-            </Nav>
-          </Navbar.Body>
+              </Nav.Item>
+            <Nav.Item eventKey="2">News</Nav.Item>
+          <Nav.Item eventKey="3">Products</Nav.Item>
+          <Dropdown title="About">
+            <Dropdown.Item eventKey="4"><a href='/company/'>Company</a></Dropdown.Item>
+            <Dropdown.Item eventKey="5">Team</Dropdown.Item>
+            <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
+          </Dropdown>
+        </Nav>
+        <Nav pullRight>
+        <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
+        </Nav>
+        </Navbar.Body>
         </Navbar>
       );
   }

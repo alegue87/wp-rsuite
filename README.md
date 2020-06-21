@@ -1,3 +1,8 @@
+# Start Story book
+```
+$yarn storybook
+```
+
 # create-react-app
 
 ## How to use
