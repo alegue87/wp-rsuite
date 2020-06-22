@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter , HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, HashRouter , Route, Switch } from 'react-router-dom';
 // Per utilizzare il router senza hash ( vedi google per differenza ) utilizzare
 // BrowserRouter as Router
 // L'HashRouter evita che la richiesta venga inoltrata backend.. come diff
@@ -9,13 +9,10 @@ import App from './App';
 import Product from './views/Product';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import Home from './views/Home'
-
-import Products from './views/Products';
-/*
 import Home from './views/Home';
 import Products from './views/Products';
 import Categories from './views/Categories';
+/*
 import Product from './views/Product';
 import Cart from './views/Cart';
 import Search from './views/Search';
@@ -46,12 +43,6 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-
-
-function Categories(argument) {
-  // body...
-}
 
 function Search(argument) {
   // body...

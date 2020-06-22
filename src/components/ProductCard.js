@@ -7,8 +7,7 @@ import config from '../config/config';
 
 class ProductCard extends Component {
   render() {
-    // @TO_FIX
-    //const categories = this.props.categories.map(category => category.name);
+    const categories = this.props.categories.map(category => category.name);
 
     return (
               <Link to={'/product/' + this.props.id}>

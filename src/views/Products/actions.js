@@ -27,9 +27,7 @@ export const fetchProducts = (params = {}) => (dispatch) => {
         .map(k => k + '=' + encodeURIComponent(params[k]))
         .join('&');
   }
-  // @TO_FIX
-  url = 'https://fgm.netsons.org/wp-json/wc/store/products/'
-
+  
   return fetch(url)
     .then(response => response.json())
     .then(json => dispatch(receiveProducts(json)))

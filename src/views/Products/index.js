@@ -35,7 +35,6 @@ class Products extends Component {
   }
 
   getCategoryName(categories) {
-    return 'NESSUNA'
     return categories.find(category =>
       Number(category.id) === Number(this.props.match.params.categId)).name;
   }

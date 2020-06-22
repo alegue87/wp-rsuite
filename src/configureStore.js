@@ -7,14 +7,14 @@ import thunk from 'redux-thunk';
 
 import { createBrowserHistory } from "history";
 import { routerMiddleware } from 'react-router-redux';
-import products from './views/Products/reducer';
 
-//import config from './config/config';
-var config = {
-  OFFLINE: false
-}
-/*
+import products from './views/Products/reducer';
 import categories from './views/Categories/reducer';
+
+import config from './config/config';
+
+/*
+
 import products from './views/Products/reducer';
 import reviews from './components/Reviews/reducer';
 import cart from './views/Cart/reducer';
@@ -29,7 +29,8 @@ const rootPersistConfig = {
     'navbar',
     'search',
     'toastr',
-    'categories', */
+    */
+    'categories', 
     'products',/*
     'reviews',
     'variations',
@@ -38,7 +39,8 @@ const rootPersistConfig = {
   // debug: true,
 };
 
-const rootReducer = persistCombineReducers(rootPersistConfig, { /*
+
+const rootReducer = persistCombineReducers(rootPersistConfig, {
   categories: persistReducer(
     {
       key: 'categories',
@@ -46,7 +48,7 @@ const rootReducer = persistCombineReducers(rootPersistConfig, { /*
       blacklist: config.OFFLINE ? ['isFetching', 'hasMore'] : ['isFetching', 'hasMore', 'items'],
     },
     categories,
-  ), */
+  ), 
   products: persistReducer(
     {
       key: 'products',
@@ -56,6 +58,7 @@ const rootReducer = persistCombineReducers(rootPersistConfig, { /*
     products,
   )
 });
+
 
 const history = createBrowserHistory();
 

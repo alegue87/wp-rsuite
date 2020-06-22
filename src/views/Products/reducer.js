@@ -61,9 +61,7 @@ const isFetching = (state = 0, action) => {
 };
 
 export const getProducts = (state, category = null) => {
-  // PER TEST @TO_FIX
-  return state.items
-  
+ 
   if (category === null) {
     return state.items;
   }
