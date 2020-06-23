@@ -2,7 +2,7 @@ import './App.css';
 import './main.style'
 
 import { Button, Container, Header, Content, Footer } from 'rsuite';
-import {Navigation} from './components/Nav'
+import Navigation from './components/Nav'
 
 import React, { Component } from 'react';
 //import ReduxToastr from 'react-redux-toastr';

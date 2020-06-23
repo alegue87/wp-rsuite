@@ -12,6 +12,11 @@ class DropdownCategories extends React.Component {
     fetchCategories()(dispatch)
   }
 
+  handleClick(){
+    console.log('click')
+    this.props.active = true
+  }
+
   render(){
     const { categories, eventKeyStart } = this.props;
 
@@ -19,7 +24,7 @@ class DropdownCategories extends React.Component {
       let eventKey = eventKeyStart;
       let category_items = Object.keys(categories)
         .map( i => 
-          <Dropdown.Item eventKey={eventKey++}>{categories[i].name}</Dropdown.Item>
+          <Dropdown.Item onClick={this.handleClick} eventKey={eventKey++}>{categories[i].name}</Dropdown.Item>
         )
       return (
         <Dropdown title='Categorie'>

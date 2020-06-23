@@ -2,9 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Nav, Navbar, Icon, Dropdown } from 'rsuite';
 import  DropdownCategories from './Nav-categories';
+import { connect } from 'react-redux';
+import { bindActionsCreator } from 'redux';
+import { fetchCategories } from '../views/Categories/actions';
+import { getCategories } from '../views/Categories/reducer';
+
 import './Nav.css'
 
-export class Navigation extends React.Component {
+class Navigation extends React.Component {
   constructor(props) {
     super(props)
     this.state = { parentWidth: 2000 }
@@ -19,10 +24,29 @@ export class Navigation extends React.Component {
     }, 300)
 
     window.addEventListener('resize', debouncedHandleResize)
+
+    const { dispatch } = this.props
+    fetchCategories()(dispatch)
   }
 
 
   render() {
+
+    const { categories } = this.props;
+
+    let categoryDropdown = <div/>; 
+    if( categories.length > 0 ){
+      let eventKey = 7;
+      let category_items = Object.keys(categories)
+        .map( i => 
+          <Dropdown.Item eventKey={eventKey++}>{categories[i].name}</Dropdown.Item>
+        )
+      categoryDropdown = (
+        <Dropdown title='Categorie'>
+          { category_items }
+        </Dropdown>
+      )
+    }
 
     if (this.state.parentWidth < window.viewPorts.sm) {
       return (
@@ -60,7 +84,7 @@ export class Navigation extends React.Component {
             <Dropdown.Item eventKey="5">Team</Dropdown.Item>
             <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
           </Dropdown>
-          <DropdownCategories eventKeyStart='7'/>
+          {categoryDropdown}
         </Nav>
         <Nav pullRight>
         <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
@@ -71,6 +95,16 @@ export class Navigation extends React.Component {
   }
 
 };
+
+const mapStateToProps = (state) => {
+  return { categories: getCategories(state.categories) }
+}
+
+const mapDispatchToProps = dispatch => {
+  return Object.assign({ dispatch })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)
 
 
 function debounce(fn, ms) {
