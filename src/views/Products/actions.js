@@ -18,10 +18,10 @@ export const fetchProducts = (params = {}) => (dispatch) => {
 
   let url;
   if (params && params.id) {
-    url = config.API_PRODUCT_URL + String(params.id);
+    url = config.API_PRODUCT_URL + '/' + String(params.id);
   } else {
-    url =
-      '' +
+    url = config.API_PRODUCTS_URL +
+      '/' +
       '?' +
       Object.keys(params)
         .map(k => k + '=' + encodeURIComponent(params[k]))

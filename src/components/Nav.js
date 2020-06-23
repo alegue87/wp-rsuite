@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Nav, Navbar, Icon, Dropdown } from 'rsuite';
+import  DropdownCategories from './Nav-categories';
 import './Nav.css'
 
 export class Navigation extends React.Component {
@@ -59,6 +60,7 @@ export class Navigation extends React.Component {
             <Dropdown.Item eventKey="5">Team</Dropdown.Item>
             <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
           </Dropdown>
+          <DropdownCategories eventKeyStart='7'/>
         </Nav>
         <Nav pullRight>
         <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>

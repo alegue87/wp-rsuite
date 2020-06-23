@@ -1,5 +1,5 @@
 
-const siteurl = 'http://wptest.me/'
+const siteurl = 'http://wptest.me'
 
 /* Configurazione passata da backend */
 /*
@@ -18,7 +18,8 @@ $config = [
 let apiurl = siteurl + '/wp-json/pwacommerce/'
 var GLOBAL = {
 	OFFINE: false,
-	API_PRODUCT_URL: apiurl + 'products',
+	API_PRODUCTS_URL: apiurl + 'products',
+	API_PRODUCT_URL: apiurl + 'product',
 	API_CATEGORIES_URL: apiurl + 'categories'
 }
 export default GLOBAL

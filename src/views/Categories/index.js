@@ -15,7 +15,6 @@ class Categories extends Component {
   render(){
     const { categories } = this.props;
     if( categories.length ){
-      console.log(categories)
       let categoriesList = Object.keys( categories )
         .map( i => 
           <li>

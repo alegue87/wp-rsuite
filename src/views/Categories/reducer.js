@@ -7,7 +7,6 @@ const items = (state = [], action) => {
 		case REQUEST_CATEGORIES:
 			return state;
 		case RECEIVE_CATEGORIES:
-			console.log(action)
 			return _.unionBy(action.categories, state, 'id') // rimuove doppioni
 		default:
 			return state;
