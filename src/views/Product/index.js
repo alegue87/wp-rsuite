@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import { fetchProducts } from '../Products/actions';
 import { getProducts, getProductsFetching, productPropType } from '../Products/reducer';
-//import ProductDetails from './ProductDetails';
+import ProductDetails from './ProductDetails';
 
 class Product extends Component {
   componentDidMount() {
@@ -46,10 +46,7 @@ class Product extends Component {
       return <p>Product does not exist</p>;
     }
 
-    return (<div>
-      <div>{product.name}</div>
-    </div>) 
-    {/*<ProductDetails product={product} />; */}
+    return <ProductDetails product={product} />
 
   }
 }

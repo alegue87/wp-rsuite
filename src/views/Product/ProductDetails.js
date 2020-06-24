@@ -3,16 +3,19 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { toastr } from 'react-redux-toastr';
-import 'react-image-gallery/styles/css/image-gallery.css';
-import { Header, Card, Icon, Button } from 'semantic-ui-react';
-import ImageGallery from 'react-image-gallery';
+//import { toastr } from 'react-redux-toastr';
+//import 'react-image-gallery/styles/css/image-gallery.css';
+//import { Header, Card, Icon, Button } from 'semantic-ui-react';
+import { Panel, Icon, Button, Notification} from 'rsuite';
+//import ImageGallery from 'react-image-gallery';
 import { productPropType } from '../Products/reducer';
-import { addProduct } from '../Cart/actions';
+//import { addProduct } from '../Cart/actions';
+/*
 import Rating from '../../components/Rating';
 import Reviews from '../../components/Reviews';
 import Variations from '../../components/Variations';
 import SocialBox from './SocialBox';
+*/
 import config from '../../config/config';
 
 import './styles.css';
@@ -64,7 +67,7 @@ class ProductDetails extends Component {
   addItem() {
     if (this.props.product.variations.length !== 0) {
       if (_.isNull(this.state.selections)) {
-        toastr.warning('Please make a selection for all of the products actions');
+        //toastr.warning('Please make a selection for all of the products actions');
         return;
       }
     }
@@ -72,21 +75,36 @@ class ProductDetails extends Component {
     const { dispatch } = this.props;
     const product = this.props.product;
 
-    dispatch(
-      addProduct(
-        product.id,
-        product.name,
-        product.price,
-        product.images[0].src,
-        this.state.variationId,
-        this.state.selections,
-      ),
-    );
-
-    toastr.success('Added to Cart', product.name + ' was added to your shopping cart.');
+    // dispatch(
+    //   addProduct(
+    //     product.id,
+    //     product.name,
+    //     product.price,
+    //     product.images[0].src,
+    //     this.state.variationId,
+    //     this.state.selections,
+    //   ),
+    // );
+    Notification['info']({
+      title: 'Carrello',
+      description: 'Prodotto aggiunto'
+    })
+    //toastr.success('Added to Cart', product.name + ' was added to your shopping cart.');
   }
 
-  render() {
+  render(){
+    const product = this.props.product
+    return (
+      <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 240, marginTop: '100px' }}>
+        <Panel header={product.name}>
+          <Button appearance='primary' onClick={this.addItem}>Aggiungi al carrello</Button>
+        </Panel>
+      </Panel>
+    )
+  }
+
+
+  render_old() {/*
     const anyCached =
       ProductDetails.isAnyCached(this.getImageGallery())[0] === false
         ? ProductDetails.isAnyCached(this.getImageGallery())[0]
@@ -151,6 +169,7 @@ class ProductDetails extends Component {
         <SocialBox permalink={this.props.product.permalink} />
       </div>
     );
+  */
   }
 }
 
@@ -160,7 +179,7 @@ ProductDetails.propTypes = {
 };
 
 function mapDispatchToProps(dispatch) {
-  return Object.assign({ dispatch }, bindActionCreators({ addProduct }, dispatch));
+  return Object.assign({ dispatch }, bindActionCreators({ /*addProduct*/ }, dispatch));
 }
 
 export default connect(null, mapDispatchToProps)(ProductDetails);

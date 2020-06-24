@@ -1,10 +1,11 @@
 import React from 'react';
 import { Dropdown } from 'rsuite'
+import { Link } from 'react-router-dom'
 
 export default class DropdownCategories{
 
   constructor(list, eventKey = 7){
-    this.keys = []
+    this.ids = []
     this.eventKey = eventKey
     /*
     this.list = [
@@ -39,8 +40,8 @@ export default class DropdownCategories{
     for(const i in list) {
       let item = list[i]
 
-      if( this.keys.indexOf(item.id) > -1 ) continue
-      else this.keys.push(item.id)
+      if( this.ids.indexOf(item.id) > -1 ) continue
+      else this.ids.push(item.id)
       
       if(this.haveChilds(item.id)){
         let childs = []
@@ -54,7 +55,7 @@ export default class DropdownCategories{
       }
       else{
         items.push( 
-          <Dropdown.Item eventKey={this.eventKey++}>{item.name}</Dropdown.Item>)
+          <Dropdown.Item eventKey={this.eventKey++}><Link to={'/category/'+item.id}>{item.name}</Link></Dropdown.Item>)
       }
     }
     return items
