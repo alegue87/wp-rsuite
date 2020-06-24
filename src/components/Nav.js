@@ -34,18 +34,9 @@ class Navigation extends React.Component {
 
     const { categories } = this.props;
 
-    let categoryDropdown = <div/>; 
+    let dropdownCategories = ''; 
     if( categories.length > 0 ){
-      let eventKey = 7;
-      let category_items = Object.keys(categories)
-        .map( i => 
-          <Dropdown.Item eventKey={eventKey++}>{categories[i].name}</Dropdown.Item>
-        )
-      categoryDropdown = (
-        <Dropdown title='Categorie'>
-          { category_items }
-        </Dropdown>
-      )
+      dropdownCategories = new DropdownCategories(categories).make()
     }
 
     if (this.state.parentWidth < window.viewPorts.sm) {
@@ -84,7 +75,7 @@ class Navigation extends React.Component {
             <Dropdown.Item eventKey="5">Team</Dropdown.Item>
             <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
           </Dropdown>
-          {categoryDropdown}
+          {dropdownCategories}
         </Nav>
         <Nav pullRight>
         <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>

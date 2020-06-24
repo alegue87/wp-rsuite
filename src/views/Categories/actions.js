@@ -20,7 +20,7 @@ const receive_categories = (categories) => {
 export const fetchCategories = (params = {}) => (dispatch) => {
 	dispatch(request_categories())
 
-	return fetch(config.API_CATEGORIES_URL)
+	return fetch(config.API_CATEGORIES_URL + '?hide_empty')
 		.then( response => response.json() )
 		.then( json => dispatch(receive_categories(json)) )
 		.catch( (error) => dispatch(receive_categories([])) )

@@ -1,47 +1,76 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionsCreator } from 'redux';
-import { fetchCategories } from '../views/Categories/actions';
-import { getCategories } from '../views/Categories/reducer';
 import { Dropdown } from 'rsuite'
 
-class DropdownCategories extends React.Component {
+export default class DropdownCategories{
 
-  componentDidMount(){
-    const { dispatch } = this.props
-    fetchCategories()(dispatch)
+  constructor(list, eventKey = 7){
+    this.keys = []
+    this.eventKey = eventKey
+    /*
+    this.list = [
+      {id:1, name:'musica', parent: 0},
+      {id:2, name:'vestiti', parent: 0},
+      {id:3, name:'album', parent: 1},
+      {id:4, name:'singolo', parent:1},
+      {id:5, name:'maglie', parent:2},
+      {id:6, name:'frutta', parent:0},
+      {id:7, name:'susine', parent:6},
+      {id:8, name:'blues', parent:3}
+    ]
+    */
+    this.list = list
+    this.dropdowns = []
   }
 
-  handleClick(){
-    console.log('click')
-    this.props.active = true
+  make(){
+    if( this.list.length === 0) return;
+    
+    return (
+      <Dropdown title='Categorie'>
+        { this.makeDropdowns(this.list) }
+      </Dropdown>
+    )
   }
 
-  render(){
-    const { categories, eventKeyStart } = this.props;
+  makeDropdowns(list){
+    
+    let items = []
 
-    if( categories.length > 0 ){
-      let eventKey = eventKeyStart;
-      let category_items = Object.keys(categories)
-        .map( i => 
-          <Dropdown.Item onClick={this.handleClick} eventKey={eventKey++}>{categories[i].name}</Dropdown.Item>
+    for(const i in list) {
+      let item = list[i]
+
+      if( this.keys.indexOf(item.id) > -1 ) continue
+      else this.keys.push(item.id)
+      
+      if(this.haveChilds(item.id)){
+        let childs = []
+        this.getChilds(item.id, childs)
+        
+        items.push(
+          <Dropdown.Menu title={item.name}>
+            {this.makeDropdowns(childs)}
+          </Dropdown.Menu>
         )
-      return (
-        <Dropdown title='Categorie'>
-          { category_items }
-        </Dropdown>
-      )
+      }
+      else{
+        items.push( 
+          <Dropdown.Item eventKey={this.eventKey++}>{item.name}</Dropdown.Item>)
+      }
     }
-    return (<div></div>)
+    return items
+  }
+               
+  haveChilds(parentId){
+    return this.list.find( i => i.parent === parentId )
+  }
+
+  getChilds(parentId, childs = []){
+    this.list.forEach( (item, i) => {
+      if( item.parent === parentId ) {
+        childs.push(item)
+        this.getChilds(item.id, childs)
+      }
+    })
   }
 }
 
-const mapStateToProps = (state) => {
-  return { categories: getCategories(state.categories) }
-}
-
-const mapDispatchToProps = dispatch => {
-  return Object.assign({ dispatch })
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DropdownCategories)
