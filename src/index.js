@@ -13,6 +13,7 @@ import Home from './views/Home';
 import Products from './views/Products';
 import Categories from './views/Categories';
 import Cart from './views/Cart';
+
 /*
 import Product from './views/Product';
 import Search from './views/Search';

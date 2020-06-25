@@ -10,10 +10,10 @@ import { Panel, Icon, Button, Notification} from 'rsuite';
 //import ImageGallery from 'react-image-gallery';
 import { productPropType } from '../Products/reducer';
 import { addProduct } from '../Cart/actions';
+import Variations from '../../components/Variations';
 /*
 import Rating from '../../components/Rating';
 import Reviews from '../../components/Reviews';
-import Variations from '../../components/Variations';
 import SocialBox from './SocialBox';
 */
 import config from '../../config/config';
@@ -100,6 +100,13 @@ class ProductDetails extends Component {
         <Panel header={product.name}>
           <Button appearance='primary' onClick={this.addItem}>Aggiungi al carrello</Button>
         </Panel>
+        {this.props.product.variations.length === 0 ? null : (
+            <Variations
+              sendSelections={this.receiveSelections}
+              productId={this.props.product.id}
+              variationIds={this.props.product.variations}
+            />
+        )} 
       </Panel>
     )
   }

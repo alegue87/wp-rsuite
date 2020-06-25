@@ -7,9 +7,11 @@ import Checkout from './Checkout';
 import config from '../../config/config';
 
 const CartSummary = props => (
-  <Panel header='Sommario'>
-    <p style={{color:'blue'}}>Totale: {props.total}</p>
-    <Checkout cart={props.cart}/>
+  <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: '100%', margin: '10px 10px' }}>
+    <Panel header='Sommario'>
+      <p>Totale: {props.total}</p>
+      <Checkout cart={props.cart}/>
+    </Panel>
   </Panel>
 
   /*

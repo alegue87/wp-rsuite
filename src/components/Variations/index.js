@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loader, Card } from 'semantic-ui-react';
+//import { Loader, Card } from 'semantic-ui-react';
+import { Panel } from 'rsuite';
 import _ from 'lodash';
 import { fetchVariations } from './actions';
 import { getVariationsFetching, getVariations, variationPropType } from './reducer';
@@ -69,7 +70,7 @@ class Variations extends Component {
 
   readVariations(productId) {
     const { dispatch } = this.props;
-    dispatch(fetchVariations(productId));
+    fetchVariations(productId)(dispatch);
   }
 
   render() {
@@ -80,9 +81,9 @@ class Variations extends Component {
     }
 
     return (
-      <Card.Content>
-        <Loader inline="centered" active />
-      </Card.Content>
+      <Panel>
+        <div>Loading</div>
+      </Panel>
     );
   }
 }

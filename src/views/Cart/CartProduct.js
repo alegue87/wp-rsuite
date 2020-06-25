@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 //import { Card, Grid, Button, Icon, Input } from 'semantic-ui-react';
-import { Panel } from 'rsuite';
+import { Panel, Button } from 'rsuite';
 import { cartProductPropType } from './reducer';
 import { setQuantity, removeProduct } from './actions';
 //import CircularImage from '../../components/CircularImage';
@@ -88,8 +88,14 @@ class CartProduct extends Component {
     return (
       <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: '100%', margin: '10px 10px' }}>
         <Panel header={product.name}>
-          <p style={{color: 'blue'}}>Prezzo: {product.price}</p>
-          <p style={{color: 'blue'}}>Quantità: {this.state.quantity}</p>
+          <p>Prezzo: {product.price}</p>
+          <p>Quantità: {this.state.quantity}</p>
+
+          <div>
+            <Button onClick={this.removeItem}>Rimuovi</Button>
+            <Button onClick={this.increaseItemQuantity}>+</Button>
+            <Button onClick={this.reduceItemQuantity}>-</Button>
+          </div>
         </Panel>
       </Panel>
     )

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { Card, Dropdown } from 'semantic-ui-react';
+//import { Card, Dropdown } from 'semantic-ui-react';
+import { Panel, SelectPicker, Icon, IconButton } from 'rsuite';
 import { variationPropType } from './reducer';
 
 class VariationsDropdown extends Component {
@@ -43,15 +44,15 @@ class VariationsDropdown extends Component {
   }
 
   // function that triggers when an option value is selected and  changes the available values for the rest of the options
-  remakeValues(data) {
+  remakeValues(item) {
     // get all the attribute combinations that have the selected value
-    const filteredAttributes = _.filter(this.state.attributes, attribute => !_.isNil(_.find(attribute, ['option', data.value])));
-
+    const filteredAttributes = _.filter(this.state.attributes, attribute => !_.isNil(_.find(attribute, ['option', item.value])));
+    //const filteredAttributes = this.state.attributes
     const options = this.state.options;
 
     // buid new options array with different values based on the selected one
     this.state.optionNames.forEach((optionName) => {
-      if (optionName !== data.placeholder) {
+      if (optionName !== item.label) { //data.placeholder) {
         options[optionName] = filteredAttributes.map(attribute => _.find(attribute, ['name', optionName]).option);
       }
     });
@@ -60,7 +61,8 @@ class VariationsDropdown extends Component {
       options,
     });
 
-    this.props.handleSelect(data.placeholder, data.value);
+    //this.props.handleSelect(data.placeholder, data.value);
+    this.props.handleSelect(item.label, item.value)
   }
 
   render() {
@@ -69,15 +71,18 @@ class VariationsDropdown extends Component {
     const valuesArray = Object.values(this.state.options);
 
     // build a values object in the format that the semantic ui dropdown component expects
-    const dropdownValues = valuesArray.map(valueArray => valueArray.map(value => ({ value, text: value })));
+    const dropdownValues = valuesArray.map(valueArray => valueArray.map(value => ({ value, label: value })));
 
     const dropdowns = options.map((name, index) => (
-      <Card.Content key={name}>
-        <Dropdown placeholder={name} fluid selection options={dropdownValues[index]} onChange={(event, data) => this.remakeValues(data)} />{' '}
-      </Card.Content>
+      <SelectPicker 
+        data={dropdownValues[index]}
+        onSelect={ (value, item, event) => this.remakeValues(item) }
+        onClean={ () => alert('clean') }
+      >
+      </SelectPicker>
     ));
 
-    return <div>{dropdowns}</div>;
+    return <Panel style={{minHeight:'300px'}}>{dropdowns}</Panel>;
   }
 }
 
@@ -87,3 +92,4 @@ VariationsDropdown.propTypes = {
 };
 
 export default VariationsDropdown;
+
