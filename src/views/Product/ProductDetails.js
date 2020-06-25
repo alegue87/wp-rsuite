@@ -9,7 +9,7 @@ import _ from 'lodash';
 import { Panel, Icon, Button, Notification} from 'rsuite';
 //import ImageGallery from 'react-image-gallery';
 import { productPropType } from '../Products/reducer';
-//import { addProduct } from '../Cart/actions';
+import { addProduct } from '../Cart/actions';
 /*
 import Rating from '../../components/Rating';
 import Reviews from '../../components/Reviews';
@@ -75,16 +75,17 @@ class ProductDetails extends Component {
     const { dispatch } = this.props;
     const product = this.props.product;
 
-    // dispatch(
-    //   addProduct(
-    //     product.id,
-    //     product.name,
-    //     product.price,
-    //     product.images[0].src,
-    //     this.state.variationId,
-    //     this.state.selections,
-    //   ),
-    // );
+    dispatch(
+      addProduct(
+        product.id,
+        product.name,
+        product.price,
+        product.images[0].src,
+        this.state.variationId,
+        this.state.selections,
+      ),
+    );
+    
     Notification['info']({
       title: 'Carrello',
       description: 'Prodotto aggiunto'

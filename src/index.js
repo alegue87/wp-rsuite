@@ -12,9 +12,9 @@ import * as serviceWorker from './serviceWorker';
 import Home from './views/Home';
 import Products from './views/Products';
 import Categories from './views/Categories';
+import Cart from './views/Cart';
 /*
 import Product from './views/Product';
-import Cart from './views/Cart';
 import Search from './views/Search';
 
 */
@@ -45,9 +45,5 @@ ReactDOM.render(
 serviceWorker.unregister();
 
 function Search(argument) {
-  // body...
-}
-
-function Cart(argument) {
   // body...
 }

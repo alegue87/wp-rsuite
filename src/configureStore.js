@@ -12,13 +12,11 @@ import products from './views/Products/reducer';
 import categories from './views/Categories/reducer';
 
 import config from './config/config';
-
-/*
-
-import products from './views/Products/reducer';
-import reviews from './components/Reviews/reducer';
 import cart from './views/Cart/reducer';
 import variations from './components/Variations/reducer';
+
+/*
+import reviews from './components/Reviews/reducer';
 import search from './views/Search/reducer';
 import navbar from './components/NavBar/reducer';
 */
@@ -29,12 +27,12 @@ const rootPersistConfig = {
     'navbar',
     'search',
     'toastr',
+    'reviews',
     */
     'categories', 
-    'products',/*
-    'reviews',
     'variations',
-    'cart',*/
+    'cart',
+    'products',
   ],
   // debug: true,
 };
@@ -56,7 +54,21 @@ const rootReducer = persistCombineReducers(rootPersistConfig, {
       blacklist: config.OFFLINE ? ['isFetching', 'hasMore'] : ['isFetching', 'hasMore', 'items'],
     },
     products,
-  )
+  ),
+  variations: persistReducer(
+    {
+      key: 'variations',
+      storage
+    },
+    variations
+  ),
+  cart: persistReducer(
+    {
+      key: 'cart',
+      storage
+    },
+    cart
+  ),
 });
 
 

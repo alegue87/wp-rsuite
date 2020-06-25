@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionsCreator } from 'redux';
 import { fetchCategories } from '../views/Categories/actions';
 import { getCategories } from '../views/Categories/reducer';
-
+import { Link } from 'react-router-dom';
 import './Nav.css'
 
 class Navigation extends React.Component {
@@ -36,7 +36,7 @@ class Navigation extends React.Component {
 
     let dropdownCategories = ''; 
     if( categories.length > 0 ){
-      dropdownCategories = new DropdownCategories(categories).make()
+      dropdownCategories = new DropdownCategories(categories, 8).make()
     }
 
     if (this.state.parentWidth < window.viewPorts.sm) {
@@ -75,6 +75,7 @@ class Navigation extends React.Component {
             <Dropdown.Item eventKey="5">Team</Dropdown.Item>
             <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
           </Dropdown>
+          <Nav.Item eventKey="7"><Link style={{color:'white', textDecoration:'none'}} to={'/cart'}>Carrello</Link></Nav.Item>
           {dropdownCategories}
         </Nav>
         <Nav pullRight>

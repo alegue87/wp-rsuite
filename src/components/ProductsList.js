@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 //import { Header } from 'semantic-ui-react';
+import { Panel } from 'rsuite'
 import ProductCard from './ProductCard';
 import { productPropType } from '../views/Products/reducer';
 
@@ -18,10 +19,9 @@ class ProductsList extends Component {
     ));
 
     return (
-      <div>
-        <div header style={{textAlign:"center"}}>{this.props.title}</div>
+      <Panel style={{textAlign:"center"}} header={this.props.title}>
         {list}
-      </div>
+      </Panel>
     );
   }
 }

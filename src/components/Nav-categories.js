@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default class DropdownCategories{
 
-  constructor(list, eventKey = 7){
+  constructor(list, eventKey = 0){
     this.ids = []
     this.eventKey = eventKey
     /*
