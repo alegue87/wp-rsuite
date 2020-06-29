@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { fetchProducts } from '../Products/actions';
 import { getProducts, getProductsFetching, productPropType } from '../Products/reducer';
 import ProductDetails from './ProductDetails';
+import { Loader, Message, Panel } from 'rsuite';
 
 class Product extends Component {
   componentDidMount() {
@@ -32,9 +33,9 @@ class Product extends Component {
   render() {
     if (this.props.loading === 1) {
       return (
-        <div>
-          Loading...
-        </div>
+        <Panel bordered className='product-container'>
+          <Loader size='md'/>
+        </Panel>
       );
     }
 
@@ -43,11 +44,20 @@ class Product extends Component {
     );
 
     if (_.isNil(product)) {
-      return <p>Product does not exist</p>;
+      return (
+        <Panel bordered className='product-container'>
+          <Message type='info' description='Prodotto non esistente'/>
+        </Panel>
+      );
     }
 
-    return <ProductDetails product={product} />
-
+    return (
+      <Panel Panel shaded bordered bodyFill 
+        className='product-container'
+      >
+        <ProductDetails product={product} />
+      </Panel>
+    );
   }
 }
 
@@ -65,7 +75,7 @@ Product.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  //loading: getProductsFetching(state.products),
+  loading: getProductsFetching(state.products),
   products: getProducts(state.products),
   //searchVisible: isSearchVisible(state.navbar),
 });

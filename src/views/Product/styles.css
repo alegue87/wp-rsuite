@@ -12,3 +12,11 @@
 .image-gallery-left-nav:hover::before {
   color: #a333c8;
 }
+
+.product-container {
+  margin:0 10px;
+}
+
+.product-image {
+  max-height:240px;
+}

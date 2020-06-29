@@ -13,6 +13,8 @@ import ProductsList from '../../components/ProductsList';
 //import { isSearchVisible } from '../../components/NavBar/reducer';
 import { Panel, Loader } from 'rsuite';
 
+import './style.css';
+
 class Products extends Component {
   constructor(props) {
     super(props);
@@ -64,7 +66,7 @@ class Products extends Component {
 
     if (loading === 1 && products.length === 0) {
       return (
-        <Panel style={{textAlign:'center', margin:'20px'}}>
+        <Panel bordered className='category-container'>
           <Loader size='md'/>
         </Panel>
       );
@@ -72,14 +74,14 @@ class Products extends Component {
 
     if (products.length === 0) {
       return (
-        <Panel style={{textAlign:'center', margin:'20px'}}>
+        <Panel bordered className='category-container'>
           Nessun prodotto trovato
         </Panel>
       );
     }
 
     return (
-      <Panel bordered header={this.getCategoryName(products[0].categories)} style={{textAlign:'center', margin:'20px'}}>
+      <Panel bordered header={this.getCategoryName(products[0].categories)} className='category-container'>
         <InfiniteScroll
           dataLength={products.length}
           next={this.loadProducts}

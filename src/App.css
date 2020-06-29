@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.main-container {
+  height:100vh;
+}
+
+.header-container {
+  height:50px;
+  background-color: #3498FF;
+  margin-bottom:10px;
+}
+
+.footer-container {
+  height:50px;
+  background-color: #3498FF;
+}

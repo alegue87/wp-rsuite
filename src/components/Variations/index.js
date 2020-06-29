@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 //import { Loader, Card } from 'semantic-ui-react';
-import { Panel } from 'rsuite';
+import { Panel, Loader} from 'rsuite';
 import _ from 'lodash';
 import { fetchVariations } from './actions';
 import { getVariationsFetching, getVariations, variationPropType } from './reducer';
@@ -88,7 +88,7 @@ class Variations extends Component {
 
     return (
       <Panel>
-        <div>Loading</div>
+        <Loader size='md'/>
       </Panel>
     );
   }

@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 //import { Card, Button, Header, Grid } from 'semantic-ui-react';
 import config from '../config/config';
-import { Panel } from 'rsuite';
+import { Panel, Carousel } from 'rsuite';
+import _ from 'lodash';
 //import CircularImage from './CircularImage';
+
+import './ProductCard.css';
 
 class ProductCard extends Component {
   render() {
@@ -12,7 +15,14 @@ class ProductCard extends Component {
 
     return (
       <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: '240px', margin: '10px 10px' }}>
-        <img src={this.props.src} style={{height:'240px'}} />
+        { _.size(this.props.images) === 1 
+          ? 
+          <img src={this.props.images[0].src} style={{height:'240px'}} />
+          :
+          <Carousel autoplay={true} className='slider'>
+            { this.props.images.map( image => <img key={image.id} alt={image.alt} src={image.src}/> )}
+          </Carousel>
+        }
         <Panel>
           <Link to={'/product/' + this.props.id}>
            {this.props.name}

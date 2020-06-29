@@ -11,7 +11,7 @@ class ProductsList extends Component {
       <ProductCard
         key={element.id}
         id={element.id}
-        src={element.images[0].src}
+        images={element.images}
         name={element.name}
         price={element.price}
         categories={element.categories}

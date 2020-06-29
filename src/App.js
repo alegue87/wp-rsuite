@@ -17,19 +17,6 @@ import { withRouter } from 'react-router';
 //import SideMenu from './views/SideMenu';
 
 
-const mainContainer = {
-  height: '100vh',
-}
-
-const headerContainer = {
-  height: '50px',
-  backgroundColor: '#3498FF'
-}
-
-const footerContainer = {
-  height: '50px',
-  backgroundColor: '#3498FF'
-}
 
 window.viewPorts = {
   xs: 0, 
@@ -55,12 +42,12 @@ class App extends React.Component {
 
     return (
       <div className="App" >
-        <Container style={{ ...mainContainer }}>
-          <Header style={{ ...headerContainer }}>
+        <Container className='main-container'>
+          <Header className='header-container'>
             <Navigation appearance='inverse' onSelect={this.handleSelect} activeKey={activeKey}/>
           </Header>
           <Content>{this.props.children}</Content>
-          <Footer style={{ ...footerContainer }}>Footer</Footer>
+          <Footer className='footer-container'>Footer</Footer>
         </Container>
       </div>
     );
