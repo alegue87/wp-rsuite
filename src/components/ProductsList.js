@@ -19,9 +19,9 @@ class ProductsList extends Component {
     ));
 
     return (
-      <Panel style={{textAlign:"center"}} header={this.props.title}>
+      <div>
         {list}
-      </Panel>
+      </div>
     );
   }
 }

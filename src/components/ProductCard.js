@@ -11,8 +11,9 @@ class ProductCard extends Component {
     const categories = this.props.categories.map(category => category.name);
 
     return (
-      <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 240, margin: '10px 10px' }}>
-        <Panel header={this.props.name}>
+      <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: '240px', margin: '10px 10px' }}>
+        <img src={this.props.src} style={{height:'240px'}} />
+        <Panel>
           <Link to={'/product/' + this.props.id}>
            {this.props.name}
           </Link>

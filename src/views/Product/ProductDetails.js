@@ -6,7 +6,7 @@ import _ from 'lodash';
 //import { toastr } from 'react-redux-toastr';
 //import 'react-image-gallery/styles/css/image-gallery.css';
 //import { Header, Card, Icon, Button } from 'semantic-ui-react';
-import { Panel, Icon, Button, Notification} from 'rsuite';
+import { Panel, Icon, Button, Notification, Alert} from 'rsuite';
 //import ImageGallery from 'react-image-gallery';
 import { productPropType } from '../Products/reducer';
 import { addProduct } from '../Cart/actions';
@@ -37,10 +37,12 @@ class ProductDetails extends Component {
     this.state = {
       selections: null,
       variationId: null,
+      variationImageSrc: '',
     };
 
     this.receiveSelections = this.receiveSelections.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.removeSelection = this.removeSelection.bind(this);
   }
 
   getCategories() {
@@ -55,9 +57,25 @@ class ProductDetails extends Component {
    * Modify component's state when a variation is selected.
    * @param {Object} selections
    * @param {Number} variationId
+   * @param {String} variationImageSrc
    */
-  receiveSelections(selections, variationId) {
-    this.setState({ selections, variationId });
+  receiveSelections(selections, variationId, variationImageSrc = '') {
+    this.setState({ selections, variationId, variationImageSrc });
+  }
+
+  /**
+   * Remove selection
+   */
+  removeSelection(name){
+    let selections = this.state.selections;
+    delete selections[name];
+
+    if( _.size(selections) === 0 ){
+      this.setState({selections: [], variationId: null, variationImageSrc: ''});
+    }
+    else{
+      this.setState({selections: selections});
+    }
   }
 
   /**
@@ -66,8 +84,8 @@ class ProductDetails extends Component {
    */
   addItem() {
     if (this.props.product.variations.length !== 0) {
-      if (_.isNull(this.state.selections)) {
-        //toastr.warning('Please make a selection for all of the products actions');
+      if (_.size(this.state.selections) < _.size(this.props.product.attributes)) {
+        Alert.info('Alcune opzioni sono da selezionare')
         return;
       }
     }
@@ -96,7 +114,10 @@ class ProductDetails extends Component {
   render(){
     const product = this.props.product
     return (
-      <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 240, marginTop: '100px' }}>
+      <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: '240px', marginTop: '100px' }}>
+        <img src={ _.isNil(this.state.variationId) ? this.props.product.images[0].src : this.state.variationImageSrc }
+          style={{height:'240px'}}
+        />
         <Panel header={product.name}>
           <Button appearance='primary' onClick={this.addItem}>Aggiungi al carrello</Button>
         </Panel>
@@ -105,6 +126,7 @@ class ProductDetails extends Component {
               sendSelections={this.receiveSelections}
               productId={this.props.product.id}
               variationIds={this.props.product.variations}
+              removeSelection={this.removeSelection}
             />
         )} 
       </Panel>

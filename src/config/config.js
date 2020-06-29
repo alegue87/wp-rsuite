@@ -16,11 +16,13 @@ $config = [
 */
 
 let apiurl = siteurl + '/wp-json/pwacommerce/'
+
 var GLOBAL = {
 	OFFINE: false,
 	API_PRODUCTS_URL: apiurl + 'products',
 	API_PRODUCT_URL: apiurl + 'product',
 	API_CATEGORIES_URL: apiurl + 'categories',
-	API_VARIATIONS_URL: apiurl + 'product-variations'
+	API_VARIATIONS_URL: apiurl + 'product-variations',
+	API_PRODUCTS_ATTRIBUTES_TERMS_URL: apiurl + 'products-attributes-terms',
 }
 export default GLOBAL

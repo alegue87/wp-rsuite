@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { REQUEST_VARIATIONS, RECEIVE_VARIATIONS } from './actions';
+import { 
+  REQUEST_VARIATIONS, RECEIVE_VARIATIONS,
+  REQUEST_TERMS, RECEIVE_TERMS
+} from './actions';
 
 export const variationPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,

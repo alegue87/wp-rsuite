@@ -63,9 +63,11 @@ class Variations extends Component {
       selections,
     });
 
-    if (_.size(this.state.selections) === this.props.variations[0].attributes.length) {
-      this.props.sendSelections(this.state.selections, this.getVariationIdBySelections());
-    }
+    //if (_.size(this.state.selections) === this.props.variations[0].attributes.length) {
+      const variationId = this.getVariationIdBySelections();
+      const variationImageSrc = _.find(this.props.variations, ['id', _.toInteger(variationId)]).image.src;
+      this.props.sendSelections(this.state.selections, variationId, variationImageSrc);
+    //}
   }
 
   readVariations(productId) {
@@ -80,7 +82,8 @@ class Variations extends Component {
       return <VariationsDropdown 
         productId={this.props.productId}
         handleSelect={this.handleSelect} 
-        variations={variationsByProduct} />;
+        variations={variationsByProduct}
+        removeSelection={this.props.removeSelection} />;
     }
 
     return (

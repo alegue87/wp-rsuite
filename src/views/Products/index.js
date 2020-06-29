@@ -11,6 +11,7 @@ import { getProductsFetching, getProducts, productPropType, getProductsHasMore }
 import ProductsList from '../../components/ProductsList';
 //import { closeSearch } from '../../components/NavBar/actions';
 //import { isSearchVisible } from '../../components/NavBar/reducer';
+import { Panel, Loader } from 'rsuite';
 
 class Products extends Component {
   constructor(props) {
@@ -63,31 +64,32 @@ class Products extends Component {
 
     if (loading === 1 && products.length === 0) {
       return (
-        <div>
-          Loading....
-        </div>
+        <Panel style={{textAlign:'center', margin:'20px'}}>
+          <Loader size='md'/>
+        </Panel>
       );
     }
 
     if (products.length === 0) {
       return (
-        <div>
-          <p>No products found.</p>
-        </div>
+        <Panel style={{textAlign:'center', margin:'20px'}}>
+          Nessun prodotto trovato
+        </Panel>
       );
     }
 
     return (
-      <InfiniteScroll
-        dataLength={products.length}
-        next={this.loadProducts}
-        hasMore={hasMore}
-      >
-        <ProductsList
-          products={_.orderBy(products, ['name'], ['asc'])}
-          title={this.getCategoryName(products[0].categories)}
-        />
-      </InfiniteScroll>
+      <Panel bordered header={this.getCategoryName(products[0].categories)} style={{textAlign:'center', margin:'20px'}}>
+        <InfiniteScroll
+          dataLength={products.length}
+          next={this.loadProducts}
+          hasMore={hasMore}
+        >
+          <ProductsList
+            products={_.orderBy(products, ['name'], ['asc'])}
+          />
+        </InfiniteScroll>
+      </Panel>
     );
   }
 }

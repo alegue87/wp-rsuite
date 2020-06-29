@@ -43,34 +43,9 @@ class VariationsDropdown extends Component {
     let values = _.uniq(
       this.props.variations.map((variation) => {
         const element = variation.attributes.find(attribute => attribute.name === optionName);
-
-        // Nel caso non ci sia una preferenza in backend 
-        // sulla variante, es: colore 'rosso' taglia 'any'
-        if(_.isUndefined(element)) {
-          getAllValues = true
-          return
-        }
-        else {
-          attributeId = element.id
           return element.option
-        } 
-      }),
-    );
-
-    if( getAllValues ){
-      // get attribute terms of product variation
-      // product/attributes/id/terms
-      console.log('id:' + attributeId)
-      values = ['Small', 'Medium', 'Large']
-        // TODO:
-        // Da recuperare con api
-        
-      this.props.variations.forEach( variation => {
-        if( _.isUndefined( variation.attributes.find( attribute => attribute.name === optionName ))){
-          values.forEach( value => variation.attributes.push({ name: optionName, option: value }) )
-        }
       })
-    }
+    );
     return values;
   }
 
@@ -102,14 +77,15 @@ class VariationsDropdown extends Component {
     this.props.handleSelect(item.name, item.value)
   }
 
-  restoreValues(){
+  removeSelection(name){
+    this.props.removeSelection(name);
     this.setState({
       options: Object.assign({}, this.state.initOptions)
     })
-    console.log(this.state.options)
   }
 
   render() {
+    
     // get options and values in the same order provided by a  for...in loop
     const options = Object.keys(this.state.options);
     const valuesArray = Object.values(this.state.options);
@@ -121,9 +97,11 @@ class VariationsDropdown extends Component {
 
     const dropdowns = options.map((name, index) => (
       <SelectPicker 
+        style={{width:'80%', marginBottom:'10px'}}
+        placeholder={name}
         data={dropdownValues[index]}
         onSelect={ (value, item, event) => this.remakeValues(item) }
-        onClean={ index > 0 ?this.restoreValues.bind(this) : null }
+        onClean={ index > 0 ?this.removeSelection.bind(this, name) : null }
         cleanable={true}
         searchable={false}
       >
