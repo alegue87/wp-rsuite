@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 //import { Segment, Header } from 'semantic-ui-react';
-import { Panel, Message } from 'rsuite';
+import { Panel, Message, Divider, List } from 'rsuite';
 import { getCart, cartProductPropType } from './reducer';
 import CardProduct from './CartProduct';
 import CardSummary from './CartSummary';
@@ -28,14 +28,19 @@ class Cart extends Component {
     return _.isEmpty(this.props.cart) ? (
       <Message description="Il carrello è vuoto"/>
     ) : (
-        <Panel header="Carrello">
-          {this.props.cart.map(product => (
-            <CardProduct
-              key={_.isNil(product.variationId) ? product.id : product.variationId}
-              product={product}
-            />
-          ))}
-          <CardSummary total={this.getTotalPrice()} cart={this.props.cart} />
+        <Panel bordered header="Carrello">
+          <List>
+            {this.props.cart.map(product => (
+              <List.Item>
+                <CardProduct
+                  key={_.isNil(product.variationId) ? product.id : product.variationId}
+                  product={product}
+                />
+              </List.Item>
+            ))}
+            <Divider>Sommario</Divider>
+            <CardSummary total={this.getTotalPrice()} cart={this.props.cart} />
+          </List>
         </Panel>
       );
   }

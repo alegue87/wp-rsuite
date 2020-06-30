@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 //import { Grid, Card, Header } from 'semantic-ui-react';
-import { Panel } from 'rsuite';
+import { Panel, List, FlexboxGrid, Row, Col } from 'rsuite';
 import { cartProductPropType } from './reducer';
 import Checkout from './Checkout';
 import config from '../../config/config';
 
 const CartSummary = props => (
-  <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: '100%', margin: '10px 10px' }}>
-    <Panel header='Sommario'>
-      <p>Totale: {props.total}</p>
-      <Checkout cart={props.cart}/>
-    </Panel>
-  </Panel>
-
+  <FlexboxGrid style={{'marginBottom': '1em'}}>
+    <FlexboxGrid.Item componentClass={Col} xsHidden sm={6} md={6}  lg={8} colspan={24}/> 
+    <FlexboxGrid.Item componentClass={Col} xs={24}  sm={12} md={12} lg={8} colspan={24}>
+      <List bordered>
+        <List.Item>Costo oggetti € {props.total} </List.Item>
+        <List.Item>Trasporto € ...</List.Item>
+        <List.Item>Totale € ...</List.Item>
+        <List.Item style={{textAlign:'right'}}><Checkout cart={props.cart}/></List.Item>
+      </List>   
+    </FlexboxGrid.Item>
+  </FlexboxGrid>
   /*
   <Card centered className="cart-summary">
     <Card.Content>

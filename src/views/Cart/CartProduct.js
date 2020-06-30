@@ -4,12 +4,11 @@ import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 //import { Card, Grid, Button, Icon, Input } from 'semantic-ui-react';
-import { Panel, Button } from 'rsuite';
+import { Panel, Button, IconButton, Icon, FlexboxGrid, Col} from 'rsuite';
 import { cartProductPropType } from './reducer';
 import { setQuantity, removeProduct } from './actions';
 //import CircularImage from '../../components/CircularImage';
 import config from '../../config/config';
-
 import './styles.css';
 
 class CartProduct extends Component {
@@ -35,12 +34,9 @@ class CartProduct extends Component {
     const description = Object.keys(this.props.product.selections)
       .map(key => _.startCase(key) + ': ' + this.props.product.selections[key])
       .join(', ');
-    return({description})
-    //return (
-    //  <Grid.Row>
-    //    <Grid.Column width={16}>{description}</Grid.Column>
-    //  </Grid.Row>
-    //);
+    return (
+        <p>{description}</p>
+    );
   }
 
   toggleCardHeight() {
@@ -86,17 +82,40 @@ class CartProduct extends Component {
   render(){
     const { product } = this.props
     return (
-      <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: '100%', margin: '10px 10px' }}>
-        <Panel header={product.name}>
-          <p>Prezzo: {product.price}</p>
-          <p>Quantità: {this.state.quantity}</p>
+      <Panel>
+        <FlexboxGrid>
+          <FlexboxGridItem xs={24} sm={8} style={{textAlign:'center'}}>
+            <h4>{product.name}</h4>
+          </FlexboxGridItem>
+          <FlexboxGridItem xs={24} sm={18}></FlexboxGridItem>
 
-          <div>
-            <Button onClick={this.removeItem}>Rimuovi</Button>
-            <Button onClick={this.increaseItemQuantity}>+</Button>
-            <Button onClick={this.reduceItemQuantity}>-</Button>
-          </div>
-        </Panel>
+          <FlexboxGridItem xs={24} sm={8} style={{textAlign:'center'}}>
+            <img style={{width:'120px'}} src={product.image} />
+          </FlexboxGridItem>
+
+          <FlexboxGridItem className='product-info' xs={24} sm={11}>
+            {this.getProductSelections()}
+            <p>Prezzo: {product.price}</p>
+            <p>Quantità: {this.state.quantity}</p>
+          </FlexboxGridItem>
+        
+          <FlexboxGridItem className='product-actions' xs={24} sm={5}>
+            <Button color='yellow' style={{margin:'4px'}} onClick={this.removeItem}>Rimuovi</Button>
+            <FlexboxGrid.Item colspan={12} style={{margin:'auto'}}>
+              <IconButton 
+                color='green'
+                icon={<Icon icon='plus-square'/>} 
+                style={{margin:'4px'}} 
+                onClick={this.increaseItemQuantity}></IconButton>
+              <IconButton 
+                color='red'
+                icon={<Icon icon='minus-square'/>}
+                style={{margin:'4px'}} 
+                onClick={this.reduceItemQuantity}></IconButton>
+            </FlexboxGrid.Item>
+          </FlexboxGridItem>
+
+        </FlexboxGrid>
       </Panel>
     )
   }
@@ -161,6 +180,10 @@ class CartProduct extends Component {
   }
   */
 }
+
+const FlexboxGridItem = (props) => (
+  <FlexboxGrid.Item componentClass={Col} colspan={24} {...props}>{props.children}</FlexboxGrid.Item>
+)
 
 CartProduct.propTypes = {
   product: cartProductPropType.isRequired,

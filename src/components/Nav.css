@@ -2,3 +2,56 @@
   padding: 18px 20px;
   display: inline-block;
 }
+
+.rs-nav-item a {
+  color:white;
+  padding:18px;
+  display: block;
+}
+
+.rs-nav-item a:hover {
+  text-decoration: none;
+  color:white;
+}
+
+.rs-nav-item-content a {
+  color:white;
+  text-decoration:none
+}
+
+.rs-nav-item-content {
+  padding:0px!important; /* necessari per ampliare l'area di click dell'ancora */
+  height: 100%!important;
+  display:flex!important; /* per le icone in nav */
+  align-items: center
+}
+
+.rs-nav-item-content .rs-icon{
+  height:100%;
+  margin-right:-13px!important;
+  margin-left:18px;
+}
+
+.rs-dropdown-item .rs-dropdown-item-content:not(.rs-dropdown-menu-toggle){
+  padding:0px!important;
+}
+
+.rs-dropdown-item .rs-dropdown-item-content a{
+  padding:8px 12px!important;
+  display: block;
+  text-decoration: none;
+}
+
+.dropdown-item {
+  padding:8px 12px!important;
+  display: block;
+}
+
+.sidenav-compact {
+  height: 56px;
+  overflow: hidden;
+}
+
+.rs-sidenav a {
+  color:white;
+}

@@ -35,3 +35,13 @@
   text-align: center !important;
   padding: 10px !important;
 }
+
+.product-actions {
+  text-align: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .product-info, .rs-panel-heading {
+    text-align: center
+  }
+}

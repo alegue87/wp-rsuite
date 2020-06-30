@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Nav, Navbar, Icon, Dropdown } from 'rsuite';
+import { Nav, Navbar, Icon, Dropdown, Sidenav } from 'rsuite';
 import  DropdownCategories from './Nav-categories';
 import { connect } from 'react-redux';
 import { bindActionsCreator } from 'redux';
@@ -12,9 +12,12 @@ import './Nav.css'
 class Navigation extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { parentWidth: 2000 }
+    this.state = { parentWidth: 2000, expanded: false, activeKey: null }
 
+    this.handleExpandSide = this.handleExpandSide.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
+
   componentDidMount() {
     this.setState({ parentWidth: ReactDOM.findDOMNode(this).parentNode.clientWidth })
 
@@ -27,8 +30,15 @@ class Navigation extends React.Component {
 
     const { dispatch } = this.props
     fetchCategories()(dispatch)
+
   }
 
+  handleExpandSide(){
+    this.setState({expanded: !this.state.expanded})
+  }
+  handleSelect(activeKey){
+    this.setState({activeKey: String(activeKey)})
+  }
 
   render() {
 
@@ -39,20 +49,54 @@ class Navigation extends React.Component {
       dropdownCategories = new DropdownCategories(categories, 8).make()
     }
 
+    const { expanded } = this.state;
+
     if (this.state.parentWidth < window.viewPorts.sm) {
       return (
-        <Navbar {...this.props}>
-          <Navbar.Header>
-            <a href="/" className="navbar-brand logo">
-              RSUITE
-            </a>
-          </Navbar.Header>
-          <Navbar.Body>
-            <Nav onSelect={this.props.onSelect} activeKey={this.props.activeKey}>
-              <Nav.Item eventKey="1" icon={<Icon icon="bars" />}></Nav.Item>
-            </Nav>
-          </Navbar.Body>
-        </Navbar>
+        <Sidenav
+          appearance='inverse'
+          expanded={expanded} 
+          style={{ height: !expanded ? 56  : 'auto' }}
+          defaultOpenKeys={[]}
+          activeKey={this.state.activeKey}
+          onSelect={this.handleSelect}
+        >
+          <Sidenav.Body>
+            <Navbar.Body>
+              <Nav onSelect={this.props.onSelect} activeKey={this.props.activeKey}>
+                <Nav.Item onClick={this.handleExpandSide}
+                  eventKey="1" 
+                  style={{height: 56}}
+                  icon={<Icon icon="bars" size='lg' />}
+                  componentClass='span'>
+                  <Link to={'/'}></Link>
+                </Nav.Item>
+
+                <Nav.Item 
+                  eventKey="2" 
+                  componentClass='span'>
+                  <a href='/products'>Prodotti</a>
+                </Nav.Item>
+                
+                <Dropdown title="Altro">
+                  <Dropdown.Item eventKey="4">
+                    <a href='/company/'>Company</a>
+                  </Dropdown.Item>
+                  <Dropdown.Item eventKey="5"><Link to={'/'}>Team</Link></Dropdown.Item>
+                  <Dropdown.Item eventKey="6"><Link to={'/'}>Contact</Link></Dropdown.Item>
+                </Dropdown>
+
+                <Nav.Item eventKey="7" componentClass='span'>
+                  <Link to={'/cart'}>
+                    Carrello
+                  </Link>
+                </Nav.Item>
+
+                {dropdownCategories}
+              </Nav>
+            </Navbar.Body>
+          </Sidenav.Body>
+        </Sidenav>
       )
     }
     else
@@ -60,28 +104,49 @@ class Navigation extends React.Component {
         <Navbar {...this.props}>
           <Navbar.Header>
             <a href="/" className="navbar-brand logo">
-              RSUITE
+              LOGO
             </a>
           </Navbar.Header>
           <Navbar.Body>
             <Nav onSelect={this.props.onSelect} activeKey={this.props.activeKey}>
-              <Nav.Item eventKey="1" icon={<Icon icon="home" />}>
-                Home
+              <Nav.Item 
+                eventKey="1"
+                componentClass='span' icon={<Icon icon="home" />}>
+                <Link to={'/'}>Home</Link>
               </Nav.Item>
-            <Nav.Item eventKey="2">News</Nav.Item>
-          <Nav.Item eventKey="3">Products</Nav.Item>
-          <Dropdown title="About">
-            <Dropdown.Item eventKey="4"><a href='/company/'>Company</a></Dropdown.Item>
-            <Dropdown.Item eventKey="5">Team</Dropdown.Item>
-            <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
-          </Dropdown>
-          <Nav.Item eventKey="7"><Link style={{color:'white', textDecoration:'none'}} to={'/cart'}>Carrello</Link></Nav.Item>
-          {dropdownCategories}
-        </Nav>
-        <Nav pullRight>
-        <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
-        </Nav>
-        </Navbar.Body>
+
+              <Nav.Item 
+                eventKey="2" 
+                componentClass='span'>
+                <a href='/products'>Prodotti</a>
+              </Nav.Item>
+              
+              <Dropdown title="Altro">
+                <Dropdown.Item eventKey="4">
+                  <a href='/company/'>Company</a>
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="5">Team</Dropdown.Item>
+                <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
+              </Dropdown>
+
+              <Nav.Item eventKey="7" componentClass='span'>
+                <Link to={'/cart'}>
+                  Carrello
+                </Link>
+              </Nav.Item>
+
+              {dropdownCategories}
+            </Nav>
+
+            <Nav pullRight>
+              <Nav.Item 
+                componentClass='span'
+                icon={<Icon icon="cog" />}>
+                <Link to={'/'}>Settings</Link>
+              </Nav.Item>
+            </Nav>
+
+          </Navbar.Body>
         </Navbar>
       );
   }

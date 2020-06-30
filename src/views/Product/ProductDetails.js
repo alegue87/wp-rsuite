@@ -98,7 +98,7 @@ class ProductDetails extends Component {
         product.id,
         product.name,
         product.price,
-        product.images[0].src,
+        this.state.variationImageSrc || product.images[0].src,
         this.state.variationId,
         this.state.selections,
       ),
@@ -108,15 +108,15 @@ class ProductDetails extends Component {
       title: 'Carrello',
       description: 'Prodotto aggiunto'
     })
-    //toastr.success('Added to Cart', product.name + ' was added to your shopping cart.');
   }
 
   render(){
     const product = this.props.product
     return (
+      <Panel>
       <Grid fluid>
         <Row>
-          <Col xs={24} sm={12} md={6} lg={6}>
+          <Col xs={24} sm={12} md={6} style={{textAlign:'center'}}>
             <Row>
               <img src={ _.isNil(this.state.variationId) ? this.props.product.images[0].src : this.state.variationImageSrc }
                 className='product-image'
@@ -139,15 +139,16 @@ class ProductDetails extends Component {
               </Button>
             </Row>
           </Col>
-          <Col xs={24} sm={12} md={18} lg={18} style={{padding:'10px'}}>
+          <Col xs={24} sm={12} md={18}>
             <Row>
-              <Panel bordered header={product.name}>
-                <div style={{textAlign:'left'}} dangerouslySetInnerHTML={{__html:product.description}}/>
+              <Panel header={product.name}>
+                <div dangerouslySetInnerHTML={{__html:product.description}}/>
               </Panel>
             </Row>
           </Col>
         </Row>
       </Grid>
+      </Panel>
     )
   }
 

@@ -1,14 +1,12 @@
 import './App.css';
 import './main.style'
 
-import { Button, Container, Header, Content, Footer } from 'rsuite';
+import { Button, Container, Header, Content, Footer, FlexboxGrid } from 'rsuite';
 import Navigation from './components/Nav'
 
 import React, { Component } from 'react';
-//import ReduxToastr from 'react-redux-toastr';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-//import { Sidebar } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 
 //import { isMenuVisible } from './components/NavBar/reducer';
@@ -41,15 +39,17 @@ class App extends React.Component {
     const { activeKey } = this.state;
 
     return (
-      <div className="App" >
-        <Container className='main-container'>
+      <Container className="App">
+        <div className='view-port'>
           <Header className='header-container'>
             <Navigation appearance='inverse' onSelect={this.handleSelect} activeKey={activeKey}/>
           </Header>
-          <Content>{this.props.children}</Content>
-          <Footer className='footer-container'>Footer</Footer>
-        </Container>
-      </div>
+          <div className='main-container'>
+            <Content>{this.props.children}</Content>
+          </div>
+        </div>
+        <Footer className='footer-container'>Footer</Footer>
+      </Container>
     );
   }
 }

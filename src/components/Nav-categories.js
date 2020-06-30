@@ -47,15 +47,19 @@ export default class DropdownCategories{
         let childs = []
         this.getChilds(item.id, childs)
         
+        // drowdown-item è utile per uniformare in dimensione agli
+        // altri items
         items.push(
-          <Dropdown.Menu title={item.name}>
+          <Dropdown.Menu title={item.name} className='dropdown-item'> 
             {this.makeDropdowns(childs)}
           </Dropdown.Menu>
         )
       }
       else{
         items.push( 
-          <Dropdown.Item eventKey={this.eventKey++}><Link to={'/category/'+item.id}>{item.name}</Link></Dropdown.Item>)
+          <Dropdown.Item eventKey={this.eventKey++} componentClass='span'>
+            <Link to={'/category/'+item.id}>{item.name}</Link>
+          </Dropdown.Item>)
       }
     }
     return items
