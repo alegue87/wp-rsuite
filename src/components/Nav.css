@@ -52,6 +52,21 @@
   overflow: hidden;
 }
 
+.rs-sidenav .rs-nav-item-content {
+  height: 56px!important;
+  padding-top:0px!important; /* incrementa spazio click per componente Link */
+  padding-bottom:0px!important;
+  padding-right:0px!important;
+}
+
+.rs-sidenav .rs-dropdown-item-content {
+  padding-top:0px!important;
+  padding-right:0px!important;
+  padding-bottom:0px!important;
+}
+
 .rs-sidenav a {
   color:white;
+  padding:15px 20px 15px 0px;
+  display:block;
 }
