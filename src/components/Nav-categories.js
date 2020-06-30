@@ -27,7 +27,7 @@ export default class DropdownCategories{
     if( this.list.length === 0) return;
     
     return (
-      <Dropdown title='Categorie'>
+      <Dropdown title='Categorie' eventKey='cat-key'>
         { this.makeDropdowns(this.list) }
       </Dropdown>
     )
@@ -50,7 +50,7 @@ export default class DropdownCategories{
         // drowdown-item è utile per uniformare in dimensione agli
         // altri items
         items.push(
-          <Dropdown.Menu title={item.name} className='dropdown-item'> 
+          <Dropdown.Menu title={item.name} eventKey={'sub-'+item.name}className='dropdown-item'> 
             {this.makeDropdowns(childs)}
           </Dropdown.Menu>
         )

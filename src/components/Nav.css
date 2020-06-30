@@ -1,48 +1,48 @@
-.navbar-brand {
+.main-nav  .navbar-brand {
   padding: 18px 20px;
   display: inline-block;
 }
 
-.rs-nav-item a {
+.main-nav .rs-nav-item a {
   color:white;
   padding:18px;
   display: block;
 }
 
-.rs-nav-item a:hover {
+.main-nav .rs-nav-item a:hover {
   text-decoration: none;
   color:white;
 }
 
-.rs-nav-item-content a {
+.main-nav  .rs-nav-item-content a {
   color:white;
   text-decoration:none
 }
 
-.rs-nav-item-content {
+.main-nav  .rs-nav-item-content {
   padding:0px!important; /* necessari per ampliare l'area di click dell'ancora */
   height: 100%!important;
   display:flex!important; /* per le icone in nav */
   align-items: center
 }
 
-.rs-nav-item-content .rs-icon{
+.main-nav  .rs-nav-item-content .rs-icon{
   height:100%;
   margin-right:-13px!important;
   margin-left:18px;
 }
 
-.rs-dropdown-item .rs-dropdown-item-content:not(.rs-dropdown-menu-toggle){
+.main-nav .rs-dropdown-item .rs-dropdown-item-content:not(.rs-dropdown-menu-toggle){
   padding:0px!important;
 }
 
-.rs-dropdown-item .rs-dropdown-item-content a{
+.main-nav .rs-dropdown-item .rs-dropdown-item-content a{
   padding:8px 12px!important;
   display: block;
   text-decoration: none;
 }
 
-.dropdown-item {
+.main-nav .dropdown-item {
   padding:8px 12px!important;
   display: block;
 }

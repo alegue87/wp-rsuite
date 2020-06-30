@@ -78,7 +78,7 @@ class Navigation extends React.Component {
                   <a href='/products'>Prodotti</a>
                 </Nav.Item>
                 
-                <Dropdown title="Altro">
+                <Dropdown title="Altro" eventKey='a'>
                   <Dropdown.Item eventKey="4">
                     <a href='/company/'>Company</a>
                   </Dropdown.Item>
@@ -101,7 +101,7 @@ class Navigation extends React.Component {
     }
     else
       return (
-        <Navbar {...this.props}>
+        <Navbar {...this.props} className='main-nav'>
           <Navbar.Header>
             <a href="/" className="navbar-brand logo">
               LOGO
