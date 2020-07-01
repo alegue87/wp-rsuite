@@ -27,7 +27,7 @@ const items = (state = [], action) => {
       let newProduct = null;
       if (!_.isNil(product)) {
         newProduct = Object.assign({}, product);
-        newProduct.quantity += 1;
+        newProduct.quantity += Number(action.quantity);
       } else {
         const now = new Date();
         newProduct = {
@@ -35,7 +35,7 @@ const items = (state = [], action) => {
           price: action.price,
           name: action.name,
           image: action.image,
-          quantity: 1,
+          quantity: action.quantity,
           dateAdded: now.toString(),
         };
 

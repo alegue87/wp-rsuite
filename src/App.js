@@ -1,7 +1,7 @@
 import './App.css';
 import './main.style'
 
-import { Button, Container, Header, Content, Footer, FlexboxGrid } from 'rsuite';
+import { Button, Container, Header, Content, Footer, FlexboxGrid, Col } from 'rsuite';
 import Navigation from './components/Nav'
 
 import React, { Component } from 'react';
@@ -44,9 +44,11 @@ class App extends React.Component {
           <Header className='header-container'>
             <Navigation appearance='inverse' onSelect={this.handleSelect} activeKey={activeKey}/>
           </Header>
-          <div className='main-container'>
-            <Content>{this.props.children}</Content>
-          </div>
+          <FlexboxGrid justify='center'>
+            <FlexboxGrid.Item componentClass={Col} xs={24} sm={24} lg={14} xl={10} className='main-container'>
+              <Content>{this.props.children}</Content>
+            </FlexboxGrid.Item>
+          </FlexboxGrid>
         </div>
         <Footer className='footer-container'>Footer</Footer>
       </Container>

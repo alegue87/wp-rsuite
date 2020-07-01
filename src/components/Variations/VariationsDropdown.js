@@ -109,7 +109,7 @@ class VariationsDropdown extends Component {
     ));
 
     // altezza minima per evitare il taglio del select al click
-    return <Panel style={{minHeight:'200px'}}>{dropdowns}</Panel>;
+    return <Panel>{dropdowns}</Panel>;
   }
 }
 
