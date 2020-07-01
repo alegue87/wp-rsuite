@@ -47,6 +47,8 @@
   display: block;
 }
 
+/* Sidenav */
+
 .sidenav-compact {
   height: 56px;
   overflow: hidden;
@@ -69,4 +71,8 @@
   color:white;
   padding:15px 20px 15px 0px;
   display:block;
+}
+
+.rs-sidenav a:focus, .rs-sidenav a:hover {
+  text-decoration: none;
 }

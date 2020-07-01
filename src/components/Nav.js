@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Nav, Navbar, Icon, Dropdown, Sidenav } from 'rsuite';
+import { Nav, Navbar, Icon, Dropdown, Sidenav, Divider } from 'rsuite';
 import  DropdownCategories from './Nav-categories';
 import { connect } from 'react-redux';
 import { bindActionsCreator } from 'redux';
@@ -56,7 +56,7 @@ class Navigation extends React.Component {
         <Sidenav
           appearance='inverse'
           expanded={expanded} 
-          style={{ height: !expanded ? 56  : 'auto' }}
+          className={ expanded ? ''  : 'sidenav-compact' }
           defaultOpenKeys={[]}
           activeKey={this.state.activeKey}
           onSelect={this.handleSelect}
@@ -86,11 +86,13 @@ class Navigation extends React.Component {
                   <Dropdown.Item eventKey="6"><Link to={'/'}>Contact</Link></Dropdown.Item>
                 </Dropdown>
 
-                <Nav.Item eventKey="7" componentClass='span'>
+                <Nav.Item eventKey="7" componentClass='span' icon={<Icon icon='shopping-cart'/>}>
                   <Link to={'/cart'}>
                     Carrello
                   </Link>
                 </Nav.Item>
+
+                <Divider/>
 
                 {dropdownCategories}
               </Nav>
@@ -129,8 +131,8 @@ class Navigation extends React.Component {
                 <Dropdown.Item eventKey="6">Contact</Dropdown.Item>
               </Dropdown>
 
-              <Nav.Item eventKey="7" componentClass='span'>
-                <Link to={'/cart'}>
+              <Nav.Item eventKey="7" componentClass='span' icon={<Icon icon='shopping-cart'/>}>
+                <Link to={'/cart'} >
                   Carrello
                 </Link>
               </Nav.Item>

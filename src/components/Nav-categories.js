@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown } from 'rsuite'
+import { Dropdown, Icon } from 'rsuite'
 import { Link } from 'react-router-dom'
 
 export default class DropdownCategories{
@@ -27,7 +27,9 @@ export default class DropdownCategories{
     if( this.list.length === 0) return;
     
     return (
-      <Dropdown title='Categorie' eventKey='cat-key'>
+      <Dropdown title='Categorie' eventKey='cat-key' 
+        icon={<Icon icon='project'/>}
+      >
         { this.makeDropdowns(this.list) }
       </Dropdown>
     )
@@ -57,7 +59,7 @@ export default class DropdownCategories{
       }
       else{
         items.push( 
-          <Dropdown.Item eventKey={this.eventKey++} componentClass='span'>
+          <Dropdown.Item eventKey={String(this.eventKey++)} componentClass='span'>
             <Link to={'/category/'+item.id}>{item.name}</Link>
           </Dropdown.Item>)
       }
