@@ -96,20 +96,22 @@ class VariationsDropdown extends Component {
     )));
 
     const dropdowns = options.map((name, index) => (
-      <SelectPicker 
-        style={{width:'80%', marginBottom:'10px'}}
-        placeholder={name}
-        data={dropdownValues[index]}
-        onSelect={ (value, item, event) => this.remakeValues(item) }
-        onClean={ index > 0 ?this.removeSelection.bind(this, name) : null }
-        cleanable={true}
-        searchable={false}
-      >
-      </SelectPicker>
+      <div>
+        <SelectPicker 
+          style={{width:'100%', marginBottom:'10px'}}
+          placeholder={name}
+          data={dropdownValues[index]}
+          onSelect={ (value, item, event) => this.remakeValues(item) }
+          onClean={ index > 0 ?this.removeSelection.bind(this, name) : null }
+          cleanable={true}
+          searchable={false}
+        >
+        </SelectPicker>
+      </div>
     ));
 
     // altezza minima per evitare il taglio del select al click
-    return <Panel>{dropdowns}</Panel>;
+    return <div>{dropdowns}</div>;
   }
 }
 

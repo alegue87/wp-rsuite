@@ -108,7 +108,7 @@ class ProductDetails extends Component {
 
     let description = 'Prodotto aggiunto';
     // Nel caso sia stato inserito il valore tramite tastiera
-    let quantity = this.quantityInputRef.current.getValue() || 1;
+    let quantity = Number(this.quantityInputRef.current.getValue()) || 1;
     if(quantity > 1) {
       description = `Aggiunti ${quantity} prodotti`; 
     }
@@ -139,41 +139,46 @@ class ProductDetails extends Component {
           componentClass={Col} 
           colspan={1}
           xs={24} sm={12} md={6} lg={6} 
-          style={{textAlign:'center'}}
         >
           <Grid fluid>
-            <Row>
+            <Row style={{textAlign:'center'}}>
               <img src={ _.isNil(this.state.variationId) ? this.props.product.images[0].src : this.state.variationImageSrc }
                 className='product-image'
+                style={{marginBottom:'10px'}}
               />
             </Row>
             <Row>
-              {this.props.product.variations.length === 0 ? null : (
-                <Variations
-                  sendSelections={this.receiveSelections}
-                  productId={this.props.product.id}
-                  variationIds={this.props.product.variations}
-                  removeSelection={this.removeSelection}
-                />
-              )}            
-            </Row>
-            <Row>
-              <InputNumber
-                placeholder='Quantità'
-                min={1}
-                onChange={this.handleQuantityInput}
-                ref={ this.quantityInputRef }
-                style={{width:'50%', margin:'auto'}}
-              />
-            </Row>
-            <Row>
-              <Button 
-                appearance='primary' 
-                onClick={this.addItem}
-                style={{margin:'10px 0'}}
-              >
-                Aggiungi al carrello
-              </Button>
+              <Col xs={5} sm={4} mdHidden lgHidden/>
+              <Col xs={14} sm={16} md={24} lg={24}>
+                <Row>
+                  {this.props.product.variations.length === 0 ? null : (
+                    <Variations
+                      sendSelections={this.receiveSelections}
+                      productId={this.props.product.id}
+                      variationIds={this.props.product.variations}
+                      removeSelection={this.removeSelection}
+                    />
+                  )}
+                </Row>
+                <Row>
+                  <InputNumber
+                    placeholder='Quantità'
+                    min={1}
+                    onChange={this.handleQuantityInput}
+                    ref={ this.quantityInputRef }
+                    style={{margin:'auto'}}
+                  />
+                </Row>
+                <Row style={{textAlign:'center'}}>
+                  <Button 
+                    appearance='primary' 
+                    onClick={this.addItem}
+                    style={{margin:'10px 0'}}
+                    >
+                    Aggiungi al carrello
+                  </Button>
+                </Row>   
+              </Col>
             </Row>
           </Grid>
         </FlexboxGrid.Item>

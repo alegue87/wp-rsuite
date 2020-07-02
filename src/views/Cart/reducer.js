@@ -69,8 +69,7 @@ const items = (state = [], action) => {
         // Overwrite product with new details
         const cartProducts = _.unionBy([newProduct], state, !_.isNil(action.variationId) ? 'variationId' : 'id');
 
-        // Order cart products by their added date
-        return _.orderBy(cartProducts, ['dateAdded'], ['asc']);
+        return cartProducts;
       }
 
       return state;
@@ -80,7 +79,7 @@ const items = (state = [], action) => {
   }
 };
 
-export const getCart = state => state.items;
+export const getCart = state => _.orderBy(state.items, ['dateAdded'], ['asc']); // Order cart products by their added date
 
 export default combineReducers({
   items,
