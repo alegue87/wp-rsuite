@@ -9,7 +9,7 @@ import _ from 'lodash';
 import { 
   Panel, Icon, Button, Notification, Alert, 
   Grid, Row, Col, FlexboxGrid,
-  InputNumber
+  InputNumber, TagGroup, Tag, Rate
 } from 'rsuite';
 //import ImageGallery from 'react-image-gallery';
 import { productPropType } from '../Products/reducer';
@@ -187,9 +187,21 @@ class ProductDetails extends Component {
           componentClass={Col} 
           colspan={1}
           xs={24} sm={12} md={18} lg={18}
+          className='description-column'
         >
-          <Panel header={product.name}>
+          <Panel header={product.name} >
             <div dangerouslySetInnerHTML={{__html:product.description}}/>
+          </Panel>
+          <Panel>
+            <div><b class='price'>€ {product.price}</b></div>
+          </Panel>
+          <Panel>
+            <TagGroup>
+              { product.tags.map(tag => <Tag color='green'>{tag.name}</Tag>) }
+            </TagGroup>
+          </Panel>
+          <Panel className='rate'>
+            <Rate defaultValue={Number(product.avarage_rating)}/>
           </Panel>
         </FlexboxGrid.Item>
 

@@ -1,12 +1,22 @@
 import React from 'react';
 import { Dropdown, Icon } from 'rsuite'
 import { Link } from 'react-router-dom'
+import _ from 'lodash';
 
-export default class DropdownCategories{
+export default (categories, eventKey) => {
+  return new DropdownCategories(categories, eventKey)
+}
 
-  constructor(list, eventKey = 0){
+/**
+  * Nota: il componente è cosi costruito per ritornare direttamente
+  * Al livello del Nav il componente Dropdown. Se non fosse cosi composto
+  * non funzionerebbe.
+  */
+class DropdownCategories {
+
+  constructor(categories, eventKey='0'){
     this.ids = []
-    this.eventKey = eventKey
+    this.eventKey = eventKey;
     /*
     this.list = [
       {id:1, name:'musica', parent: 0},
@@ -19,18 +29,17 @@ export default class DropdownCategories{
       {id:8, name:'blues', parent:3}
     ]
     */
-    this.list = list
     this.dropdowns = []
+    this.list = categories;
+    return this.render();
   }
 
-  make(){
-    if( this.list.length === 0) return;
-    
+  render(){    
     return (
-      <Dropdown title='Categorie' eventKey='cat-key' 
+      <Dropdown title='Categorie' eventKey={'cat-' + this.eventKey} 
         icon={<Icon icon='project'/>}
       >
-        { this.makeDropdowns(this.list) }
+        { _.size(this.list) > 0 ? this.makeDropdowns(this.list) : null }
       </Dropdown>
     )
   }

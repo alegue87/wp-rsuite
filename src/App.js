@@ -2,7 +2,7 @@ import './App.css';
 import './main.style'
 
 import { Button, Container, Header, Content, Footer, FlexboxGrid, Col } from 'rsuite';
-import Navigation from './components/Nav'
+import Navigation from './components/Navigation'
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';

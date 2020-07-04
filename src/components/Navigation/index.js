@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Nav, Navbar, Icon, Dropdown, Sidenav, Divider } from 'rsuite';
-import  DropdownCategories from './Nav-categories';
+import  DropdownCategories from './DropdownCategories';
 import { connect } from 'react-redux';
 import { bindActionsCreator } from 'redux';
-import { fetchCategories } from '../views/Categories/actions';
-import { getCategories } from '../views/Categories/reducer';
+import { fetchCategories } from '../../views/Categories/actions';
+import { getCategories } from '../../views/Categories/reducer';
 import { Link } from 'react-router-dom';
-import './Nav.css'
+import './style.css'
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -43,12 +43,6 @@ class Navigation extends React.Component {
   render() {
 
     const { categories } = this.props;
-
-    let dropdownCategories = ''; 
-    if( categories.length > 0 ){
-      dropdownCategories = new DropdownCategories(categories, 8).make()
-    }
-
     const { expanded } = this.state;
 
     if (this.state.parentWidth < window.viewPorts.sm) {
@@ -94,7 +88,7 @@ class Navigation extends React.Component {
 
                 <Divider/>
 
-                {dropdownCategories}
+                {DropdownCategories(categories, '8')}
               </Nav>
             </Navbar.Body>
           </Sidenav.Body>
@@ -137,7 +131,7 @@ class Navigation extends React.Component {
                 </Link>
               </Nav.Item>
 
-              {dropdownCategories}
+              {DropdownCategories(categories, '8')}
             </Nav>
 
             <Nav pullRight>

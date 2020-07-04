@@ -15,7 +15,7 @@ $config = [
 ];
 */
 
-let apiurl = siteurl + '/wp-json/pwacommerce/'
+let apiurl = siteurl + '/wp-json/pwacommerce/';
 
 var GLOBAL = {
 	OFFINE: false,

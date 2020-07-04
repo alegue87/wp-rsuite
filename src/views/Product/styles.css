@@ -22,3 +22,26 @@
   width: 100%;
   max-width: 240px;
 }
+
+.description-column .rs-panel-heading {
+  letter-spacing: 2px;
+  font-size:25px;
+}
+
+.description-column .price {
+  float:right;
+  font-size:25px;
+  color:#3498ff;
+}
+
+@media only screen and (max-width: 480px) {
+  .description-column .price {
+    float:none;
+    text-align:center;
+    display: block;
+  }
+
+  .description-column .rate {
+    text-align: center;
+  }
+}
